@@ -1,0 +1,18 @@
+# Gradle / Android Studio
+.gradle/
+build/
+/app/build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.idea/
+.kotlin/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep large demo videos out of the repository
+*.mp4

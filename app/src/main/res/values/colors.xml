@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_700">#2E7D32</color>
+    <color name="green_800">#1B5E20</color>
+    <color name="green_100">#C8E6C9</color>
+    <color name="green_50">#E8F5E9</color>
+    <color name="orange_700">#E65100</color>
+    <color name="orange_50">#FFF3E0</color>
+    <color name="red_700">#C62828</color>
+    <color name="red_50">#FFEBEE</color>
+    <color name="ic_launcher_background">#2E7D32</color>
+</resources>
