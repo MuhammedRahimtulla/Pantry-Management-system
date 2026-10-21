@@ -31,4 +31,41 @@
         <item quantity="other">%1$d items expire within %2$d days - cook them first!</item>
     </plurals>
     <string name="see_recipes">See recipes</string>
+
+    <!-- Add / edit ingredient -->
+    <string name="title_add_ingredient">Add Ingredient</string>
+    <string name="title_edit_ingredient">Edit Ingredient</string>
+    <string name="hint_name">Ingredient name</string>
+    <string name="helper_name">Start typing to pick from ingredients used in recipes</string>
+    <string name="hint_quantity">Quantity</string>
+    <string name="hint_unit">Unit</string>
+    <string name="hint_expiry">Expiry date (optional)</string>
+    <string name="clear">Clear</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="unit_g">g (grams)</string>
+    <string name="unit_kg">kg (kilograms)</string>
+    <string name="unit_ml">ml (millilitres)</string>
+    <string name="unit_l">l (litres)</string>
+    <string name="unit_tsp">tsp (teaspoons)</string>
+    <string name="unit_tbsp">tbsp (tablespoons)</string>
+    <string name="unit_cup">cup (250 ml cups)</string>
+    <string name="unit_pcs">pcs (pieces)</string>
+    <string name="error_name_required">Please enter an ingredient name</string>
+    <string name="error_name_short">Name must be at least 2 characters</string>
+    <string name="error_name_chars">Use letters only (spaces, - and \' are allowed)</string>
+    <string name="error_quantity_required">Please enter a quantity</string>
+    <string name="error_quantity_number">Quantity must be a number, e.g. 2 or 0.5</string>
+    <string name="error_quantity_positive">Quantity must be more than 0</string>
+    <string name="error_quantity_too_big">Quantity is too large (max 100 000)</string>
+    <string name="error_unit_required">Please choose a unit</string>
+    <string name="error_expiry_past">Expiry date cannot be in the past for a new item</string>
+    <string name="unit_mismatch_warning">Recipes measure this in %1$s - choose a matching unit or it will not count</string>
+    <string name="unit_suggestion">Recipes measure this in %1$s</string>
+    <string name="saved">Saved %1$s</string>
+    <string name="deleted">Deleted %1$s</string>
+    <string name="delete_confirm_title">Delete ingredient?</string>
+    <string name="delete_confirm_message">Remove %1$s from your pantry?</string>
+    <string name="item_not_found">That item no longer exists</string>
 </resources>

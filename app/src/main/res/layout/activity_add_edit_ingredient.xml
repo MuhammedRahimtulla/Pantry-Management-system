@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Add / Edit Ingredient form. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_layout"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                app:counterEnabled="true"
+                app:counterMaxLength="40"
+                app:helperText="@string/helper_name">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:maxLength="40" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/quantity_layout"
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_quantity">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/quantity_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:maxLength="9" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/unit_layout"
+                    style="?attr/textInputOutlinedExposedDropdownMenuStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:hint="@string/hint_unit">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/unit_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/expiry_layout"
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_expiry"
+                    app:startIconDrawable="@drawable/ic_event">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/expiry_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/clear_expiry_button"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/clear" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/delete_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/delete"
+                android:textColor="@color/status_expired_text"
+                android:visibility="gone"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/status_expired_text"
+                app:strokeColor="@color/status_expired_text" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

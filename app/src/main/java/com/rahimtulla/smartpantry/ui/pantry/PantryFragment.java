@@ -47,6 +47,9 @@ public class PantryFragment extends Fragment {
         adapter = new PantryAdapter(this::onItemClicked);
         list.setAdapter(adapter);
 
+        view.findViewById(R.id.fab_add).setOnClickListener(v ->
+                startActivity(AddEditIngredientActivity.newIntent(requireContext())));
+
         // LiveData: Room re-runs the query and calls this observer every time the pantry table changes,
         // and stops automatically when this fragment's view is destroyed.
         AppDatabase.get(requireContext()).pantryDao().observeAll()
@@ -90,7 +93,8 @@ public class PantryFragment extends Fragment {
         expiringBannerText.setText(getResources().getQuantityString(R.plurals.expiring_banner, count, count, window));
     }
 
+    /** Explicit Intent carrying the item's id, so the editor knows which row to load. */
     private void onItemClicked(PantryItem item) {
-        // Opening the editor is added together with the Add/Edit screen.
+        startActivity(AddEditIngredientActivity.newIntent(requireContext(), item.id));
     }
 }

@@ -20,7 +20,10 @@ public interface RecipeDao {
     @Query("SELECT * FROM recipes WHERE id = :id")
     RecipeWithIngredients getWithIngredients(long id);
 
-    /** Every distinct ingredient name used by the recipes - used for autocomplete on the add screen. */
-    @Query("SELECT DISTINCT name FROM recipe_ingredients ORDER BY name COLLATE NOCASE")
-    List<String> getAllIngredientNames();
+    /**
+     * Every ingredient name used by the recipes with the unit they use - powers autocomplete and the
+     * unit suggestion on the add/edit screen.
+     */
+    @Query("SELECT name, unit FROM recipe_ingredients GROUP BY name ORDER BY name COLLATE NOCASE")
+    List<IngredientUnit> getIngredientUnits();
 }
