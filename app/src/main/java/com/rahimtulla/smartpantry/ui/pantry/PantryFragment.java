@@ -7,10 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.rahimtulla.smartpantry.R;
 import com.rahimtulla.smartpantry.data.AppDatabase;
+import com.rahimtulla.smartpantry.data.PantryDao;
 import com.rahimtulla.smartpantry.data.PantryItem;
 import com.rahimtulla.smartpantry.ui.MainActivity;
 import com.rahimtulla.smartpantry.util.Formatters;
@@ -46,6 +49,8 @@ public class PantryFragment extends Fragment {
         RecyclerView list = view.findViewById(R.id.pantry_list);
         adapter = new PantryAdapter(this::onItemClicked);
         list.setAdapter(adapter);
+
+        attachSwipeToDelete(list, view.findViewById(R.id.pantry_root));
 
         view.findViewById(R.id.fab_add).setOnClickListener(v ->
                 startActivity(AddEditIngredientActivity.newIntent(requireContext())));
@@ -91,6 +96,38 @@ public class PantryFragment extends Fragment {
         }
         expiringBanner.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
         expiringBannerText.setText(getResources().getQuantityString(R.plurals.expiring_banner, count, count, window));
+    }
+
+    /**
+     * Swipe a row left or right to delete it. The deleted item is kept in memory so the Snackbar's
+     * Undo button can insert it back (with the same id).
+     */
+    private void attachSwipeToDelete(RecyclerView list, View snackbarParent) {
+        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView rv, @NonNull RecyclerView.ViewHolder vh,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getBindingAdapterPosition();
+                if (position == RecyclerView.NO_POSITION) {
+                    return;
+                }
+                PantryItem deleted = adapter.getItemAt(position);
+                PantryDao dao = AppDatabase.get(requireContext()).pantryDao();
+                AppDatabase.EXECUTOR.execute(() -> dao.delete(deleted));
+
+                Snackbar.make(snackbarParent, getString(R.string.deleted, deleted.name), Snackbar.LENGTH_LONG)
+                        .setAnchorView(R.id.fab_add)
+                        .setAction(R.string.undo, v -> AppDatabase.EXECUTOR.execute(() -> dao.insert(deleted)))
+                        .show();
+            }
+        };
+        new ItemTouchHelper(callback).attachToRecyclerView(list);
     }
 
     /** Explicit Intent carrying the item's id, so the editor knows which row to load. */
