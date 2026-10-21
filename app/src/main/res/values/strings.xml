@@ -90,6 +90,7 @@
     <string name="check_unit_mismatch">In your pantry, but in a unit that cannot be converted to %1$s</string>
     <string name="check_missing">Not in your pantry</string>
     <string name="step_number">%1$d.</string>
+    <string name="ingredient_line">%1$s  %2$s</string>
     <string name="recipe_not_found">Recipe not found</string>
     <string name="cooked_button">I cooked this - use up ingredients</string>
     <string name="cooked_hint_enabled">Removes the amounts above from your pantry, oldest stock first.</string>
@@ -99,5 +100,25 @@
     <string name="cooked_confirm_ok">Use up</string>
     <string name="cooked_done">Enjoy! Your pantry has been updated.</string>
     <string name="cooked_failed">Your pantry changed and this recipe can no longer be made.</string>
+
+    <!-- Settings -->
+    <string name="pref_category_expiry">Expiry alerts</string>
+    <string name="pref_expiry_highlight_title">Highlight expiring items</string>
+    <string name="pref_expiry_highlight_summary">Colour items that are about to expire and show a reminder on the pantry screen</string>
+    <string name="pref_expiry_window_title">Expiring soon means within</string>
+    <string name="pref_category_matching">Recipe matching</string>
+    <string name="pref_exclude_expired_title">Ignore expired ingredients</string>
+    <string name="pref_exclude_expired_summary">Expired items will not count towards suggested recipes</string>
+    <string name="pref_category_units">Units</string>
+    <string name="pref_default_unit_title">Default unit for new items</string>
+    <string name="pref_category_data">Data</string>
+    <string name="pref_clear_pantry_title">Clear pantry</string>
+    <string name="pref_clear_pantry_summary">Delete every pantry item (the recipe collection is kept)</string>
+    <string name="pref_about_title">About</string>
+    <string name="pref_about_summary">Smart Pantry 1.0 - all data is stored on this device in a local SQLite database (Room). No location or internet access is used.</string>
+    <string name="clear_confirm_title">Clear the whole pantry?</string>
+    <string name="clear_confirm_message">This deletes every ingredient in your pantry and cannot be undone.</string>
+    <string name="clear_confirm_ok">Clear</string>
+    <string name="pantry_cleared">Pantry cleared</string>
     <string name="all_summary">%1$d recipes in the collection. Ready ones can be cooked with what you have now.</string>
 </resources>

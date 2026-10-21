@@ -11,8 +11,6 @@ import java.util.Locale;
  */
 public final class Formatters {
 
-    private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault());
-
     private Formatters() {
     }
 
@@ -34,6 +32,7 @@ public final class Formatters {
     }
 
     public static String date(long epochDay) {
-        return LocalDate.ofEpochDay(epochDay).format(DATE);
+        // Built on each call so a change of device language is picked up straight away.
+        return LocalDate.ofEpochDay(epochDay).format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.getDefault()));
     }
 }

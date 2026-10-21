@@ -197,7 +197,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             TextView detail = row.findViewById(R.id.check_detail);
 
             RecipeIngredient need = check.required;
-            name.setText(Formatters.amount(need.quantity, need.unit) + "  " + need.name);
+            name.setText(getString(R.string.ingredient_line, Formatters.amount(need.quantity, need.unit), need.name));
             String available = Formatters.amount(check.availableInRequiredUnit, need.unit);
             switch (check.status) {
                 case HAVE_ENOUGH:

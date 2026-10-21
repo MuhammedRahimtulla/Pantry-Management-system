@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.rahimtulla.smartpantry.R;
 import com.rahimtulla.smartpantry.ui.pantry.PantryFragment;
 import com.rahimtulla.smartpantry.ui.recipes.RecipeListFragment;
+import com.rahimtulla.smartpantry.ui.settings.SettingsFragment;
 import com.rahimtulla.smartpantry.util.InsetsHelper;
 
 /**
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (menuItemId == R.id.nav_recipes) {
             fragment = RecipeListFragment.all();
         } else {
-            fragment = new Fragment(R.layout.fragment_placeholder);
+            fragment = new SettingsFragment();
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
