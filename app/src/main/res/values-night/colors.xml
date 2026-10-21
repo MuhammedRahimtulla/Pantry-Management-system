@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="status_ok">#81C784</color>
+    <color name="status_ok_bg">#1B2E1C</color>
     <color name="status_soon_text">#FFB74D</color>
     <color name="status_soon_bg">#3E2A14</color>
     <color name="status_expired_text">#EF9A9A</color>

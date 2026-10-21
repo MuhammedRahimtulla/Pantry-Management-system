@@ -128,7 +128,8 @@ public class RecipeListFragment extends Fragment {
                 : getString(R.string.all_summary, total));
     }
 
+    /** Explicit Intent passing the recipe id to the detail screen. */
     private void openRecipe(RecipeWithIngredients recipe) {
-        // Opening the recipe detail screen is added together with that screen.
+        startActivity(RecipeDetailActivity.newIntent(requireContext(), recipe.recipe.id));
     }
 }

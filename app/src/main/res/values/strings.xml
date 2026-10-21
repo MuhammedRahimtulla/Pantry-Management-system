@@ -76,5 +76,20 @@
     <string name="no_matches_title">No recipes match your pantry yet</string>
     <string name="no_matches_body">Add more ingredients. A recipe only appears here when you have every ingredient it needs, in the full amount.</string>
     <string name="suggested_summary">You can cook %1$d of %2$d recipes using only what is in your pantry.</string>
+    <!-- Recipe detail -->
+    <string name="ingredients">Ingredients</string>
+    <string name="method">Method</string>
+    <string name="prep_minutes">%1$d minutes</string>
+    <string name="status_can_make">You have everything for this recipe - it can be cooked now.</string>
+    <plurals name="status_cannot_make">
+        <item quantity="one">%d ingredient is missing or short, so this recipe is not suggested yet.</item>
+        <item quantity="other">%d ingredients are missing or short, so this recipe is not suggested yet.</item>
+    </plurals>
+    <string name="check_have">You have %1$s</string>
+    <string name="check_not_enough">Only %1$s in your pantry</string>
+    <string name="check_unit_mismatch">In your pantry, but in a unit that cannot be converted to %1$s</string>
+    <string name="check_missing">Not in your pantry</string>
+    <string name="step_number">%1$d.</string>
+    <string name="recipe_not_found">Recipe not found</string>
     <string name="all_summary">%1$d recipes in the collection. Ready ones can be cooked with what you have now.</string>
 </resources>

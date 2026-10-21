@@ -7,6 +7,7 @@
 
     <!-- Status colours (overridden in values-night for dark mode) -->
     <color name="status_ok">#2E7D32</color>
+    <color name="status_ok_bg">#E8F5E9</color>
     <color name="status_soon_text">#B74700</color>
     <color name="status_soon_bg">#FFF3E0</color>
     <color name="status_expired_text">#C62828</color>
