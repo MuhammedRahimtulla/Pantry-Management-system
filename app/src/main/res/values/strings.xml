@@ -69,4 +69,12 @@
     <string name="delete_confirm_message">Remove %1$s from your pantry?</string>
     <string name="item_not_found">That item no longer exists</string>
     <string name="undo">Undo</string>
+
+    <!-- Recipe lists -->
+    <string name="ready">Ready</string>
+    <string name="recipe_meta">%1$d min  ·  %2$d ingredients</string>
+    <string name="no_matches_title">No recipes match your pantry yet</string>
+    <string name="no_matches_body">Add more ingredients. A recipe only appears here when you have every ingredient it needs, in the full amount.</string>
+    <string name="suggested_summary">You can cook %1$d of %2$d recipes using only what is in your pantry.</string>
+    <string name="all_summary">%1$d recipes in the collection. Ready ones can be cooked with what you have now.</string>
 </resources>
