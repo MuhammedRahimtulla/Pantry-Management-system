@@ -2,9 +2,11 @@ package com.rahimtulla.smartpantry.data;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +28,15 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase instance;
 
+    /** Runs once, when the database file is first created on the device: pre-loads the recipe collection. */
+    private static final RoomDatabase.Callback SEED_CALLBACK = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            SeedData.insertAll(db);
+        }
+    };
+
     public abstract PantryDao pantryDao();
 
     public abstract RecipeDao recipeDao();
@@ -36,6 +47,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
+                            .addCallback(SEED_CALLBACK)
                             .build();
                 }
             }
