@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.rahimtulla.smartpantry.R;
 import com.rahimtulla.smartpantry.data.AppDatabase;
 import com.rahimtulla.smartpantry.data.PantryItem;
@@ -47,6 +49,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private TextView nameView, descriptionView, timeView, statusText;
     private MaterialCardView statusCard;
     private LinearLayout ingredientsContainer, stepsContainer;
+    private Button cookedButton;
+    private TextView cookedHint;
+    /** Name of the loaded recipe, for the confirmation dialog. */
+    private String recipeName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("");
         InsetsHelper.padTop(toolbar);
-        InsetsHelper.padBottom(findViewById(R.id.scroll));
+        InsetsHelper.padBottom(findViewById(R.id.bottom_bar));
 
         nameView = findViewById(R.id.recipe_name);
         descriptionView = findViewById(R.id.recipe_description);
@@ -68,6 +74,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
         statusText = findViewById(R.id.status_text);
         ingredientsContainer = findViewById(R.id.ingredients_container);
         stepsContainer = findViewById(R.id.steps_container);
+        cookedButton = findViewById(R.id.cooked_button);
+        cookedHint = findViewById(R.id.cooked_hint);
+        cookedButton.setEnabled(false);
+        cookedButton.setOnClickListener(v -> confirmCooked());
 
         recipeId = getIntent().getLongExtra(EXTRA_RECIPE_ID, -1);
     }
@@ -105,9 +115,55 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void confirmCooked() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.cooked_confirm_title)
+                .setMessage(getString(R.string.cooked_confirm_message, recipeName))
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.cooked_confirm_ok, (dialog, which) -> useUpIngredients())
+                .show();
+    }
+
+    /**
+     * Deducts the recipe's ingredients from the pantry. Runs in one database transaction so the pantry
+     * is never left half-updated: every affected row is either updated (some left) or deleted (used up).
+     */
+    private void useUpIngredients() {
+        boolean excludeExpired = Prefs.excludeExpired(this);
+        long today = Formatters.todayEpochDay();
+        AppDatabase db = AppDatabase.get(this);
+        AppDatabase.EXECUTOR.execute(() -> {
+            boolean success;
+            try {
+                db.runInTransaction(() -> {
+                    RecipeWithIngredients recipe = db.recipeDao().getWithIngredients(recipeId);
+                    List<PantryItem> pantry = db.pantryDao().getAllOldestFirst();
+                    for (PantryItem changed : RecipeMatcher.planConsumption(recipe, pantry, today, excludeExpired)) {
+                        if (changed.quantity <= 0) {
+                            db.pantryDao().delete(changed);
+                        } else {
+                            db.pantryDao().update(changed);
+                        }
+                    }
+                });
+                success = true;
+            } catch (IllegalStateException e) {
+                success = false;   // pantry changed since the screen was loaded
+            }
+            boolean ok = success;
+            runOnUiThread(() -> {
+                Toast.makeText(this, ok ? R.string.cooked_done : R.string.cooked_failed, Toast.LENGTH_LONG).show();
+                load();
+            });
+        });
+    }
+
     private void show(RecipeMatcher.RecipeMatch match) {
         RecipeWithIngredients r = match.recipe;
+        recipeName = r.recipe.name;
         setTitle(r.recipe.name);
+        cookedButton.setEnabled(match.canMake());
+        cookedHint.setText(match.canMake() ? R.string.cooked_hint_enabled : R.string.cooked_hint_disabled);
         nameView.setText(r.recipe.name);
         descriptionView.setText(r.recipe.description);
         timeView.setText(getString(R.string.prep_minutes, r.recipe.prepMinutes));

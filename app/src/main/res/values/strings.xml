@@ -91,5 +91,13 @@
     <string name="check_missing">Not in your pantry</string>
     <string name="step_number">%1$d.</string>
     <string name="recipe_not_found">Recipe not found</string>
+    <string name="cooked_button">I cooked this - use up ingredients</string>
+    <string name="cooked_hint_enabled">Removes the amounts above from your pantry, oldest stock first.</string>
+    <string name="cooked_hint_disabled">Available once you have every ingredient.</string>
+    <string name="cooked_confirm_title">Use up these ingredients?</string>
+    <string name="cooked_confirm_message">The ingredient amounts for %1$s will be taken out of your pantry. Items that run out are removed.</string>
+    <string name="cooked_confirm_ok">Use up</string>
+    <string name="cooked_done">Enjoy! Your pantry has been updated.</string>
+    <string name="cooked_failed">Your pantry changed and this recipe can no longer be made.</string>
     <string name="all_summary">%1$d recipes in the collection. Ready ones can be cooked with what you have now.</string>
 </resources>
