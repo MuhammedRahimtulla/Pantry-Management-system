@@ -26,11 +26,17 @@ public final class InsetsHelper {
         });
     }
 
-    /** Pads the bottom of a view by the navigation-bar height, or the keyboard height when it is open. */
+    /**
+     * Pads the bottom of a view by the navigation-bar height, or the keyboard height when it is open.
+     * Some phones (e.g. Samsung with gesture navigation) report a zero-height navigation bar but still
+     * draw a gesture handle, so the mandatory gesture area is reserved as well.
+     */
     public static void padBottom(View view) {
         final int start = view.getPaddingBottom();
         ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
-            Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            Insets bars = Insets.max(
+                    windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()),
+                    windowInsets.getInsets(WindowInsetsCompat.Type.mandatorySystemGestures()));
             Insets ime = windowInsets.getInsets(WindowInsetsCompat.Type.ime());
             v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(),
                     start + Math.max(bars.bottom, ime.bottom));

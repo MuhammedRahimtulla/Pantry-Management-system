@@ -26,6 +26,9 @@ import java.util.List;
  */
 public class PantryFragment extends Fragment {
 
+    /** How long the Undo option stays on screen after a swipe-delete (LENGTH_LONG is under 3 seconds). */
+    private static final int UNDO_DURATION_MS = 5000;
+
     private PantryAdapter adapter;
     private View emptyState;
     private View expiringBanner;
@@ -121,7 +124,7 @@ public class PantryFragment extends Fragment {
                 PantryDao dao = AppDatabase.get(requireContext()).pantryDao();
                 AppDatabase.EXECUTOR.execute(() -> dao.delete(deleted));
 
-                Snackbar.make(snackbarParent, getString(R.string.deleted, deleted.name), Snackbar.LENGTH_LONG)
+                Snackbar.make(snackbarParent, getString(R.string.deleted, deleted.name), UNDO_DURATION_MS)
                         .setAnchorView(R.id.fab_add)
                         .setAction(R.string.undo, v -> AppDatabase.EXECUTOR.execute(() -> dao.insert(deleted)))
                         .show();

@@ -41,6 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:completionThreshold="1"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
                     android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
                     android:maxLength="40" />
