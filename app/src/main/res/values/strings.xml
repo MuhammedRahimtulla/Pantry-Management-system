@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Smart Pantry</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_pantry">Pantry</string>
+    <string name="nav_suggested">Suggested</string>
+    <string name="nav_recipes">Recipes</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Screen titles -->
+    <string name="title_pantry">My Pantry</string>
+    <string name="title_suggested">Suggested Recipes</string>
+    <string name="title_recipes">All Recipes</string>
+    <string name="title_settings">Settings</string>
+
+    <!-- Pantry list -->
+    <string name="add_ingredient">Add ingredient</string>
+    <string name="pantry_empty_title">Your pantry is empty</string>
+    <string name="pantry_empty_body">Tap + to add the ingredients you have at home. Smart Pantry will suggest recipes that use only what you already have.</string>
+    <string name="no_expiry">No expiry date</string>
+    <string name="expires_on">Expires %1$s</string>
+    <string name="expires_today">Expires today</string>
+    <string name="expired_on">Expired %1$s</string>
+    <plurals name="expires_in_days">
+        <item quantity="one">Expires tomorrow</item>
+        <item quantity="other">Expires in %d days</item>
+    </plurals>
+    <plurals name="expiring_banner">
+        <item quantity="one">%1$d item expires within %2$d days - cook it first!</item>
+        <item quantity="other">%1$d items expire within %2$d days - cook them first!</item>
+    </plurals>
+    <string name="see_recipes">See recipes</string>
 </resources>
